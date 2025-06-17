@@ -25,8 +25,9 @@ public class Categorie {
 		// TODO Auto-generated constructor stub
 	} 
 	
-	public Categorie(String libelle, String description) {
+	public Categorie(Long id,String libelle, String description) {
 		super();
+		this.id=id;
 		this.libelle = libelle;
 		this.description = description;
 	}

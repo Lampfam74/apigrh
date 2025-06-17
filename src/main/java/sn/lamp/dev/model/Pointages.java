@@ -2,6 +2,7 @@ package sn.lamp.dev.model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
@@ -37,7 +38,10 @@ public class Pointages {
 		this.entree = entree;
 		this.token = token;
 	}
-	public Long getId() {
+
+
+
+    public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {

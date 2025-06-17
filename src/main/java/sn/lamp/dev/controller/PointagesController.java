@@ -33,20 +33,19 @@ public class PointagesController {
 	private PersonalServiceIpml personalServiceIpml;
 
 	@GetMapping("/pointages")
-	public ResponseEntity<List<Pointages>> getAll() {
-		return ResponseEntity.ok(pointagesServiceIpml.getAll());
+	public List<Pointages> getAll() {
+		return pointagesServiceIpml.getAll();
 	}
-	
-	
+
 	 @RequestMapping(value = "/pointages", method = {RequestMethod.POST, RequestMethod.PUT})
 	 @PostMapping
 	 @PutMapping
-	public ResponseEntity<Map<Pointages, String>> addPointages(@RequestBody Pointages P){
+	public String addPointages(Pointages P){
 		//variable
 	
 		
 		Pointages Per = new Pointages();
-		Map<Pointages,String> response = new HashMap<>();
+		String response = new String();
 		Pointages p = new Pointages();
 		//logique
 		
@@ -64,7 +63,7 @@ public class PointagesController {
 				if(P.getType().equals(Constant.ENTREE)){
 					P.setSortie(Time.valueOf("00:00:00"));
 					pointagesServiceIpml.save(P);
-					response.put(P,"entree effectuer successfuly");
+					response="entree effectuer successfuly";
 				}
 				if(P.getType().equals(Constant.SORTIE)){
 					if(P.getSortie() == null) {
@@ -72,15 +71,15 @@ public class PointagesController {
 					Per.setId(Per.getId());
 					Per.setSortie(P.getEntree());
 					pointagesServiceIpml.save(Per);
-				    response.put(P,"Sortie effectuer successfuly");
+				    response="Sortie effectuer successfuly";
 					}
 			}
 	    }else {
-	    	response.put(p,"deja pointee different ");
+	    	response="deja pointee different ";
 	    }
     	} else {
-    		response.put(p,"token doest not exist ");
+    		response="token doest not exist ";
     	}
-		return ResponseEntity.ok(response);
+		return response;
 	}
 }
